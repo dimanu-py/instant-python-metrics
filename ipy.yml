@@ -1,0 +1,26 @@
+dependencies: []
+general:
+  author: Diego
+  dependency_manager: uv
+  description: Custom API to register usage metrics of instant-python
+  license: MIT
+  python_version: '3.13'
+  slug: instant-python-metrics
+  source_name: src
+  version: 0.1.0
+  year: 2026
+git:
+  email: dimanu.py@gmail.com
+  initialize: true
+  username: dimanu-py
+template:
+  aggregate_name: null
+  bounded_context: null
+  built_in_features:
+  - github_actions
+  - github_issues_template
+  - makefile
+  - precommit_hook
+  - ai_agents
+  name: standard_project
+  specify_bounded_context: false

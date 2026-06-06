@@ -119,17 +119,21 @@ pytest tests
 ## 7. Documentation Standards
 
 - **User-Focused README**: README.md must be user-focused, containing only information relevant to table authors and end users.
-- **Separate Dev Docs**: All technical documentation and conventions must be maintained in `docs/adrs/`.
-- **Separate Design Docs**: All design decisions, feature specifications, and architectural discussions must be maintained in `docs/design_docs/`.
+- **Separate Dev Docs**: All technical documentation, architectural decisions, and conventions must be maintained in `docs/adrs/`.
+- **Separate Specs Docs**: All design decisions, feature specifications, and requirements must be maintained in `docs/specs/`.
 - **Error Examples**: User-facing documentation should include example error messages for common validation failures to help users quickly resolve issues.
 
-```
-docs/adrs/
-├── adr-guidelines.md          # Standard for documenting conventions
-├── database/                  # Database-related conventions (planned)
-├── testing/                   # Testing-related conventions (planned)
-├── ...
-```
+### Repository Structure
+
+| File / Directory           | Content                                                        | When to read                      |
+|----------------------------|----------------------------------------------------------------|-----------------------------------|
+| `docs/progress/current.md` | Current session state                                          | Always when starting              |
+| `docs/progress/history.md` | Bitácora append-only of previous sessions                      | When historic knowledge is needed |
+| `docs/features/`           | Feature specs: requirements and acceptance criteria in Gherkin | When implementing a feature       |
+| `docs/adrs/`               | Project conventions and architecture decisions (ADR)           | When coding or reviewing          |
+| `docs/design-docs/`        | Design decisions, feature specifications, architecture         | When understanding design context |
+| `src/`                     | Source code                                                    | When implementing                 |
+| `test/`                    | Automated tests                                                | When implementing and verifying   |
 
 ## 8. Quick Reference
 

@@ -4,15 +4,15 @@ description: Create or improve adr documentation based on the current conversati
   were requested because it didn’t follow the repository’s conventions.
 ---
 
-Based on the current conversation, create new or improve existing documentation files inside the `docs/adrs` folder.
+Based on the current conversation, create new or improve existing documentation files inside the `docs/conventions` folder.
 
 ## Steps
 
 1. Identify conventions, patterns, or decisions discussed in the conversation that should be documented.
-2. Check if a relevant doc already exists in `docs/adrs` (organized by area: `testing/`, `database/`, etc.).
+2. Check if a relevant doc already exists in `docs/conventions` (organized by area: `testing/`, `database/`, etc.).
     - If it exists, improve it while preserving the required structure.
     - If it does not exist, create a new file in the appropriate subfolder.
-3. Read `docs/adrs/adr-guidelines.md` and follow its structure exactly. Every document MUST include these sections in order:
+3. Read `docs/conventions/adr-guidelines.md` and follow its structure exactly. Every document MUST include these sections in order:
 ```
 # Name of the convention
 

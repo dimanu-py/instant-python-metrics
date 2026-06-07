@@ -31,24 +31,24 @@ remove-dep:  ## Remove a dependency
 	@uv remove $(dep)
 
 .PHONY: test
-test:  ## Run all test.
+test:  ## Run all tests (optional: TESTS_PATH=tests/feature/).
 	@echo "⌛ Running tests...\n"
-	@uv run pytest test -ra
+	@uv run pytest $(or $(TESTS_PATH),test) -ra
 
 .PHONY: unit
-unit:  ## Run all unit test.
+unit:  ## Run unit tests (optional: TESTS_PATH=tests/feature/).
 	@echo "⌛ Running unit tests...\n"
-	@uv run pytest -m "unit" -ra
+	@uv run pytest -m "unit" $(TESTS_PATH) -ra
 
 .PHONY: integration
-integration:  ## Run all integration test.
+integration:  ## Run integration tests (optional: TESTS_PATH=tests/feature/).
 	@echo "⌛ Running integration tests...\n"
-	@uv run pytest -m "integration" -ra
+	@uv run pytest -m "integration" $(TESTS_PATH) -ra
 
 .PHONY: acceptance
-acceptance:  ## Run all acceptance test.
+acceptance:  ## Run acceptance tests (optional: TESTS_PATH=tests/feature/).
 	@echo "⌛ Running acceptance tests...\n"
-	@uv run pytest -m "acceptance" -ra
+	@uv run pytest -m "acceptance" $(TESTS_PATH) -ra
 
 .PHONY: coverage
 coverage:  ## Run all test with coverage.
@@ -81,6 +81,12 @@ check-format:  ## Run ruff format check.
 format:  ## Apply ruff format fix.
 	@echo "⌛ Formatting project code...\n"
 	@uvx ruff format src test
+
+.PHONY: mutate
+mutate:  ## Run mutation testing with mutmut (optional: set MUTATE_PATH=src/feature/).
+	@echo "⌛ Running mutation testing...\n"
+	@uv run mutmut run $(if $(MUTATE_PATH),--paths-to-mutate=$(MUTATE_PATH),)
+	@uv run mutmut results
 
 .PHONY: autostyle
 autostyle:  ## Apply all code style fixes.

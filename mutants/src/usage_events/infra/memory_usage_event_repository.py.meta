@@ -1,0 +1,15 @@
+{
+    "exit_code_by_key": {
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1__init____mutmut_1": 1,
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1save__mutmut_1": 1
+    },
+    "durations_by_key": {
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1save__mutmut_1": 0.06686,
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1__init____mutmut_1": 0.081366
+    },
+    "type_check_error_by_key": {},
+    "estimated_durations_by_key": {
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1save__mutmut_1": 0.014735464021214284,
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1__init____mutmut_1": 0.03499230003217235
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "exit_code_by_key": {
+        "usage_events.delivery.app.x_create_app__mutmut_1": 1,
+        "usage_events.delivery.app.x_create_app__mutmut_2": 1,
+        "usage_events.delivery.app.x_create_app__mutmut_3": 0,
+        "usage_events.delivery.app.x_create_app__mutmut_4": 0,
+        "usage_events.delivery.app.x_create_app__mutmut_5": 0,
+        "usage_events.delivery.app.x_create_app__mutmut_6": 1
+    },
+    "durations_by_key": {
+        "usage_events.delivery.app.x_create_app__mutmut_1": 0.077329,
+        "usage_events.delivery.app.x_create_app__mutmut_2": 0.067085,
+        "usage_events.delivery.app.x_create_app__mutmut_6": 0.055018,
+        "usage_events.delivery.app.x_create_app__mutmut_3": 0.105427,
+        "usage_events.delivery.app.x_create_app__mutmut_5": 0.098993,
+        "usage_events.delivery.app.x_create_app__mutmut_4": 0.102853
+    },
+    "type_check_error_by_key": {},
+    "estimated_durations_by_key": {
+        "usage_events.delivery.app.x_create_app__mutmut_1": 0.040244916031952016,
+        "usage_events.delivery.app.x_create_app__mutmut_2": 0.040244916031952016,
+        "usage_events.delivery.app.x_create_app__mutmut_3": 0.040244916031952016,
+        "usage_events.delivery.app.x_create_app__mutmut_4": 0.040244916031952016,
+        "usage_events.delivery.app.x_create_app__mutmut_5": 0.040244916031952016,
+        "usage_events.delivery.app.x_create_app__mutmut_6": 0.040244916031952016
+    }
+}

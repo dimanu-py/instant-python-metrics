@@ -60,6 +60,42 @@ delivery/ ──→ application/ ──→ domain/
 
 No shared folder exists until a pattern is used across three or more features (YAGNI).
 
+### Protocol structural typing (port interfaces)
+
+Port interfaces in the domain layer use `typing.Protocol` to define the contract. Concrete adapter implementations in `infra/` do NOT explicitly inherit from the Protocol — they satisfy it structurally by having matching method signatures.
+
+This structural subtyping approach avoids two common issues with explicit inheritance from Protocol:
+
+1. **No `type: ignore[misc]` needed** — mypy does not complain about structural Protocol implementations.
+2. **Loose coupling** — the adapter is not import-coupled to the domain port; it only needs to match the method signatures.
+
+```python
+# src/usage_events/domain/usage_event_repository.py
+from typing import Protocol
+
+class UsageEventRepository(Protocol):
+    def save(self, event: UsageEvent) -> None: ...
+
+# src/usage_events/infra/memory_usage_event_repository.py
+# No "class MemoryUsageEventRepository(UsageEventRepository)" inheritance
+class MemoryUsageEventRepository:
+    def save(self, event: UsageEvent) -> None:
+        self._events.append(event)
+
+# src/usage_events/infra/postgres_usage_event_repository.py
+# No "class PostgresUsageEventRepository(UsageEventRepository)" inheritance
+class PostgresUsageEventRepository:
+    def __init__(self, session: Session) -> None:
+        self._session = session
+
+    def save(self, event: UsageEvent) -> None:
+        ...
+```
+
+The Protocol is used for type-checking when the port is injected (e.g., in use case constructors). Runtime compatibility is guaranteed by matching method signatures — no `@runtime_checkable` decorator needed for this pattern.
+
+If a `Protocol` uses `@runtime_checkable`, concrete implementations MAY still avoid explicit inheritance. Use `@runtime_checkable` only when `isinstance()` checks against the protocol are needed at runtime.
+
 ### Naming conventions
 
 | Layer       | File naming                      | Class naming                     |
@@ -69,7 +105,7 @@ No shared folder exists until a pattern is used across three or more features (Y
 | domain      | `invoice.py`, `invoice_id.py`    | `Invoice` (aggregate)            |
 | infra       | `postgres_invoice_repository.py` | `PostgresInvoiceRepository`      |
 
-Port interfaces in `domain/` use `abc.ABC` and are named after the concept, not the implementation (e.g., `InvoiceRepository`, not `PostgresInvoiceRepository`).
+Port interfaces in `domain/` use `typing.Protocol` (structural subtyping) and are named after the concept, not the implementation (e.g., `InvoiceRepository`, not `PostgresInvoiceRepository`).
 
 ## Benefits
 
@@ -113,7 +149,7 @@ src/infra/postgres_invoice_repository.py
 
 Scattered files make it hard to find all pieces of a feature. Changing a feature requires touching files in four separate top-level directories.
 
-### Good: Port interface in domain
+### Good: Port interface in domain (Protocol structural typing)
 
 ```python
 # src/invoices/domain/invoice_repository.py
@@ -121,6 +157,19 @@ from typing import Protocol
 
 class InvoiceRepository(Protocol):
     def save(self, invoice: Invoice) -> None: ...
+```
+
+```python
+# src/invoices/infra/postgres_invoice_repository.py
+from sqlalchemy.orm import Session
+
+# Does NOT inherit from InvoiceRepository — structural subtyping
+class PostgresInvoiceRepository:
+    def __init__(self, session: Session) -> None:
+        self._session = session
+
+    def save(self, invoice: Invoice) -> None:
+        ...
 ```
 
 ### Bad: Port coupled to implementation
@@ -132,6 +181,21 @@ from src.invoices.infra.postgres_invoice_repository import PostgresInvoiceReposi
 
 Use case depends directly on a concrete adapter, making it impossible to test without a database.
 
+### Bad: Explicit Protocol inheritance in adapters
+
+```python
+# src/invoices/infra/postgres_invoice_repository.py
+from src.invoices.domain.invoice_repository import InvoiceRepository
+
+# Explicit inheritance triggers mypy errors about Protocol method signatures,
+# requiring # type: ignore[misc] workarounds
+class PostgresInvoiceRepository(InvoiceRepository):  # type: ignore[misc]
+    def save(self, invoice: Invoice) -> None:
+        ...
+```
+
+Structural subtyping (no explicit inheritance) avoids these mypy issues entirely.
+
 ## Real world examples
 
 - `src/` — the codebase follows this structure
@@ -140,3 +204,7 @@ Use case depends directly on a concrete adapter, making it impossible to test wi
 
 - `docs/conventions/convention-guidelines.md` — document structure standard
 - `docs/conventions/workflow/leader_workflow.md` — the development pipeline this code structure supports
+- `docs/conventions/architecture/uuid-v7.md` — UUID v7 generation for entity identifiers
+- `docs/conventions/architecture/postgres-repository.md` — PostgreSQL adapter pattern
+- `docs/conventions/architecture/alembic-setup.md` — Alembic configuration for ORM models
+- `docs/conventions/testing/doublex-mocking.md` — mocking port interfaces in tests

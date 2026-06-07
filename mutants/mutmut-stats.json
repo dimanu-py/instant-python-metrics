@@ -1,0 +1,86 @@
+{
+    "tests_by_mangled_function_name": {
+        "usage_events.application.register_usage_event.x\u01c1RegisterUsageEventUseCase\u01c1__init__": [
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_built_in_features_list_is_accepted",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_empty_built_in_features",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_extra_unknown_fields_are_silently_ignored",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_database_unavailable_returns_503",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_all_field_values",
+            "test/usage_events/delivery/test_acceptance.py::TestRegisterUsageEvent::test_valid_usage_event_returns_201_with_id_and_location",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_returns_event_id_matching_saved_event"
+        ],
+        "usage_events.delivery.app.x_create_app": [
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_multiple_missing_fields_returns_422_for_each",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_invalid_distinct_id_format_is_rejected",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_malformed_semver_in_ipy_version_is_rejected",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_built_in_features_list_is_accepted",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_extra_unknown_fields_are_silently_ignored",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_database_unavailable_returns_503",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_field_exceeding_max_length_is_rejected",
+            "test/usage_events/delivery/test_acceptance.py::TestRegisterUsageEvent::test_valid_usage_event_returns_201_with_id_and_location",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_distinct_id_is_rejected",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_categorical_field_is_rejected",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_missing_required_field_returns_422",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_malformed_json_body_returns_400"
+        ],
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1save": [
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_built_in_features_list_is_accepted",
+            "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_event_and_preserves_fields",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_extra_unknown_fields_are_silently_ignored",
+            "test/usage_events/delivery/test_acceptance.py::TestRegisterUsageEvent::test_valid_usage_event_returns_201_with_id_and_location",
+            "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_multiple_events"
+        ],
+        "usage_events.application.register_usage_event.x\u01c1RegisterUsageEventUseCase\u01c1execute": [
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_built_in_features_list_is_accepted",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_empty_built_in_features",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_extra_unknown_fields_are_silently_ignored",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_database_unavailable_returns_503",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_all_field_values",
+            "test/usage_events/delivery/test_acceptance.py::TestRegisterUsageEvent::test_valid_usage_event_returns_201_with_id_and_location",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_returns_event_id_matching_saved_event"
+        ],
+        "usage_events.infra.memory_usage_event_repository.x\u01c1MemoryUsageEventRepository\u01c1__init__": [
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_multiple_missing_fields_returns_422_for_each",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_invalid_distinct_id_format_is_rejected",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_malformed_semver_in_ipy_version_is_rejected",
+            "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_event_and_preserves_fields",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_built_in_features_list_is_accepted",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_extra_unknown_fields_are_silently_ignored",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_field_exceeding_max_length_is_rejected",
+            "test/usage_events/delivery/test_acceptance.py::TestRegisterUsageEvent::test_valid_usage_event_returns_201_with_id_and_location",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_distinct_id_is_rejected",
+            "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_multiple_events",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_categorical_field_is_rejected",
+            "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_missing_required_field_returns_422"
+        ],
+        "usage_events.domain.usage_event.x_uuid7": [
+            "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_event_and_preserves_fields",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_empty_built_in_features",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_all_field_values",
+            "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_multiple_events",
+            "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_returns_event_id_matching_saved_event"
+        ]
+    },
+    "duration_by_test": {
+        "test/usage_events/delivery/test_acceptance.py::TestRegisterUsageEvent::test_valid_usage_event_returns_201_with_id_and_location": 0.008318327010783833,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_missing_required_field_returns_422": 0.0031478460077778436,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_multiple_missing_fields_returns_422_for_each": 0.002918965998105705,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_invalid_distinct_id_format_is_rejected": 0.0028013050032313913,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_malformed_semver_in_ipy_version_is_rejected": 0.002643580002768431,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_extra_unknown_fields_are_silently_ignored": 0.0026146759919356555,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_built_in_features_list_is_accepted": 0.0031111760035855696,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_database_unavailable_returns_503": 0.0032860760038602166,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_malformed_json_body_returns_400": 0.002657825010828674,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_field_exceeding_max_length_is_rejected": 0.0030047369946260005,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_categorical_field_is_rejected": 0.002718240997637622,
+        "test/usage_events/delivery/test_router.py::TestRegisterUsageEventRouter::test_empty_distinct_id_is_rejected": 0.003022161006811075,
+        "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_all_field_values": 0.0009394119915668853,
+        "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_returns_event_id_matching_saved_event": 0.0004691640060627833,
+        "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_event_and_preserves_fields": 0.0003554560025804676,
+        "test/usage_events/application/test_register_usage_event.py::TestRegisterUsageEventUseCase::test_saves_event_with_empty_built_in_features": 0.0005462659974000417,
+        "test/usage_events/infra/test_memory_usage_event_repository.py::TestMemoryUsageEventRepository::test_stores_multiple_events": 0.00033582901232875884,
+        "test/usage_events/domain/test_usage_event.py::TestUsageEvent::test_event_id_can_be_generated_with_uuid7_library": 0.0005203230030019768,
+        "test/usage_events/domain/test_usage_event.py::TestUsageEvent::test_event_id_is_uuid_v7": 0.0002160760050173849
+    },
+    "stats_time": 0.520470599
+}

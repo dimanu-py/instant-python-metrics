@@ -1,0 +1,120 @@
+[project]
+name = "instant-python-metrics"
+version = "0.1.0"
+description = "Custom API to register usage metrics of instant-python"
+authors = [{name = "Diego", email = "dimanu.py@gmail.com"}]
+dependencies = [
+    "alembic>=1.18.4",
+    "fastapi>=0.136.3",
+    "psycopg2-binary>=2.9.12",
+    "python-dotenv>=1.2.2",
+    "sqlalchemy>=2.0.50",
+    "uuid7>=0.1.0",
+    "uvicorn>=0.49.0",
+]
+requires-python = "==3.13.*"
+readme = "README.md"
+license = { file = "LICENSE" }
+
+[dependency-groups]
+dev = [
+    {include-group = "release"},
+    {include-group = "lint"},
+    {include-group = "test"},
+]
+release = [
+    "python-semantic-release",
+]
+lint = [
+    "mypy",
+    "ruff",
+    "pip-audit",
+    "pre-commit",
+]
+test = [
+    "doublex>=1.9.6.1",
+    "doublex-expects>=0.7.1",
+    "expects>=0.9.0",
+    "httpx>=0.28.1",
+    "mutmut>=3.5.0",
+    "pytest>=9.0.3",
+    "pytest-mock>=3.15.1",
+]
+
+[tool.uv]
+exclude-newer = "3 days"
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: Unit tests (fast, no external dependencies).",
+    "integration: Integration tests (require database).",
+    "acceptance: Acceptance tests (full stack).",
+]
+testpaths = ["test"]
+pythonpath = ["src"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+explicit_package_bases = true
+exclude = [
+    ".*/alembic/",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "C4", "UP", "I"]
+ignore = ["B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src", "test"]
+
+[tool.mutmut]
+paths_to_mutate = ["src/usage_events/"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+
+[project.optional-dependencies]
+build = ["uv"]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+commit_message = "bump: new version {version} created"
+commit_parser = "conventional"
+major_on_zero = false
+allow_zero_version = true
+no_git_verify = false
+tag_format = "{version}"
+build_command = """
+    pip install -e '.[build]'
+    uv lock --upgrade-package "$PACKAGE_NAME"
+    git add uv.lock
+    uv build
+"""
+
+[tool.semantic_release.commit_parser_options]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf", "refactor", "test", "build"]
+allowed_tags = ["feat", "fix", "refactor", "perf", "build"]
+default_bump_level = 0
+parse_squash_commits = false
+ignore_merge_commits = true
+
+[tool.semantic_release.changelog]
+changelog_file = "CHANGELOG.md"
+exclude_commit_patterns = ['''^Merge pull request #''', '''^Merge branch ''']
+mode = "update"
+#template_dir = "docs/changelog"
+
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG"
+output_format = "md"
+mask_initial_release = false

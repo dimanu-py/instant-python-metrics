@@ -36,6 +36,53 @@ and each inner layer is driven by the tests of the layer above it.
 
 Each step follows strict TDD: Red → Green → Refactor before moving to the next.
 
+### Test markers
+
+Tag every test file with a `@pytest.mark` marker indicating the layer under test:
+
+| Marker               | Layer            | File location                           |
+|----------------------|------------------|-----------------------------------------|
+| `@pytest.mark.acceptance` | Delivery (full stack) | `test/<feature>/delivery/test_acceptance.py` |
+| `@pytest.mark.unit`  | All unit tests   | `test/<feature>/**/test_*.py` (excluding acceptance) |
+
+Class-level markers keep test files clean:
+
+```python
+@pytest.mark.acceptance
+class TestRegisterUsageEvent:
+    """Acceptance tests for POST /api/v1/events."""
+
+    def test_valid_usage_event_returns_201_with_id_and_location(self, client: TestClient) -> None:
+        ...
+```
+
+```python
+@pytest.mark.unit
+class TestRegisterUsageEventRouter:
+    """Unit tests for POST /api/v1/events router."""
+
+    def test_missing_required_field_returns_422(self, client: TestClient) -> None:
+        ...
+```
+
+### Scenario references in test names
+
+Link every test back to its Gherkin scenario using an `@sN` tag in the docstring. This creates traceability between the `.feature` file and the test suite:
+
+```python
+def test_valid_usage_event_returns_201_with_id_and_location(self, client: TestClient) -> None:
+    """@s1: Register a valid usage event with all fields."""
+    ...
+```
+
+```python
+def test_missing_required_field_returns_422(self, client: TestClient) -> None:
+    """@s2: Missing a required field returns 422."""
+    ...
+```
+
+The `@sN` tags correspond to the scenario order in `docs/features/<feature>.feature`.
+
 ### Testing the delivery layer
 
 Delivery tests use FastAPI `TestClient` against the ASGI app. Two categories:
@@ -57,13 +104,21 @@ def test_create_invoice_returns_201_with_location(client: TestClient) -> None:
 
 ```python
 # tests/invoices/delivery/test_router.py
-from doublex import Mock, when
-from doublex_expects import have_been_called_with
-from expects import expect
+from doublex import ANY_ARG, Mock, expect_call
+from expects import expect, equal
 
-def test_returns_422_for_missing_amount(client: TestClient) -> None:
-    response = client.post("/invoices", json={"currency": "USD"})
-    assert response.status_code == 422
+def test_database_unavailable_returns_503(client: TestClient) -> None:
+    from usage_events.delivery.router import _get_repository
+    from usage_events.domain.usage_event_repository import UsageEventRepository
+
+    repository = Mock(UsageEventRepository)
+    expect_call(repository).save(ANY_ARG).raises(RuntimeError("Database connection failed"))
+
+    client.app.dependency_overrides[_get_repository] = lambda: repository
+
+    response = client.post("/api/v1/events", json=valid_payload)
+
+    expect(response.status_code).to(equal(503))
 ```
 
 ### Testing the application layer
@@ -72,16 +127,18 @@ Application tests exercise use cases in isolation. Infra port dependencies are m
 
 ```python
 # tests/invoices/application/test_create_invoice.py
-from doublex import Mock, when
-from doublex_expects import have_been_called_with
-from expects import expect
+from doublex import ANY_ARG, Mock, expect_call
+from expects import expect, be_none, have_properties
 
 def test_creates_invoice_and_saves() -> None:
-    repo = Mock(InvoiceRepository)
-    when(repo).save(...)
+    repo: Any = Mock(InvoiceRepository)
+    expect_call(repo).save(ANY_ARG)
     use_case = CreateInvoiceUseCase(repo)
-    result = use_case.execute(amount="100.00", currency="USD")
-    expect(repo.save).to(have_been_called_with(...))
+    event_id = use_case.execute(amount="100.00", currency="USD")
+
+    expect(event_id).to_not(be_none)
+    saved_event = repo.save.calls[0].args[0]
+    expect(saved_event).to(have_properties(amount="100.00", currency="USD"))
 ```
 
 ### Testing the infra layer
@@ -178,4 +235,5 @@ A delivery unit test that also asserts database queries. Slow, coupled, and dupl
 ## Related agreements
 
 - `docs/conventions/architecture/architecture.md` — the code structure these tests exercise
+- `docs/conventions/testing/doublex-mocking.md` — doublex mocking patterns for repository ports
 - `docs/conventions/convention-guidelines.md` — document structure standard

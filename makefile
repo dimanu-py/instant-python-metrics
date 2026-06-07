@@ -60,7 +60,7 @@ coverage:  ## Run all test with coverage.
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
 	@echo "⌛ Running type checking...\n"
-	@uv run mypy
+	@uv run mypy src test
 
 .PHONY: check-lint
 check-lint:  ## Run ruff linting check.

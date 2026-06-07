@@ -35,11 +35,11 @@ REFACTOR  → clean up with the bar green: names, duplication, short functions
 
 1. Read `docs/conventions/convention-guidelines.md`, `docs/conventions/architecture.md`, `docs/conventions/leader_workflow.md`, `docs/conventions/tdd-outside-in.md`, the `.spec` and the `.feature` for the feature.
 2. Record in `progress/current.md`: `Feature in progress: <name>` and the list of scenarios `@s1..@sn` you will cover.
-3. Before starting the TDD cycle, check if the scenario requires a risky change (DB schema, API contract, service replacement). If so, use the **micro-steps-coach** skill to plan the expand-contract pattern first — then proceed with TDD.
+3. Before starting the TDD cycle, check if the scenario requires a risky change (DB schema, API contract, service replacement). If so, use the **micro_steps_coach** skill to plan the expand-contract pattern first — then proceed with TDD.
 4. **For each scenario `@s` in order**, execute one or more Red-Green-Refactor cycles using Outside-In TDD:
-   a. **RED** — write a test in `tests/` that encodes that Given/When/Then and verify it **fails** (`make unit`). Apply the **test-desiderata** skill to ensure the test is isolated, fast, specific, and behavioral. A test that passes on the first try proves nothing — adjust it or be suspicious.
+   a. **RED** — write a test in `tests/` that encodes that Given/When/Then and verify it **fails** (`make unit`). Apply the **test_desiderata** skill to ensure the test is isolated, fast, specific, and behavioral. A test that passes on the first try proves nothing — adjust it or be suspicious.
    b. **GREEN** — the minimum implementation in `src/` that makes it pass.
-   c. **REFACTOR** — with the bar green, apply the **xp-refactor** skill to eliminate duplication, improve naming, and simplify. Run tests again after every change.
+   c. **REFACTOR** — with the bar green, apply the **xp_refactor** skill to eliminate duplication, improve naming, and simplify. Run tests again after every change.
    d. Append the cycle to `progress/tdd_<name>.md` (which `@s`, which test, what minimum change).
 5. **Outside-In order per scenario**: not every `@s` scenario becomes an acceptance test. Per the TDD convention:
    - **Happy path and critical error scenarios** → start with a delivery acceptance test (TestClient, full stack). Then drive the application layer, then domain and infra.

@@ -1,5 +1,5 @@
 ---
-name: design-doc
+name: design_doc
 description: Create or improve design documents based on the current conversation. Use this when a new feature or architectural
   change has been discussed that should be captured as a design doc.
 ---

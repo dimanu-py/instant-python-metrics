@@ -23,7 +23,7 @@ questions the human did not ask themselves:
 - What is the exact output contract (status codes, response body)?
 - What design alternative did we discard and why?
 - Does this conflict with a previous decision documented in another `.spec`?
-- Is the proposed technical approach over-engineered for the actual need? (Use the **complexity-review** skill to challenge unnecessary scale, consistency, or infrastructure choices.)
+- Is the proposed technical approach over-engineered for the actual need? (Use the **complexity_review** skill to challenge unnecessary scale, consistency, or infrastructure choices.)
 
 Propose **at least two options** for each non-trivial decision and argue for one. Let 
 the human decide; record the decision and its rationale.
@@ -34,9 +34,9 @@ the human decide; record the decision and its rationale.
 and any existing `.spec` or `.feature` for the feature.
 2. **Debate** open points with the human. One question or block of options per 
 turn — do not fire an entire questionnaire at once. When decomposing the 
-feature, use the **story-splitting** skill to detect if the feature is too broad, 
-the **hamburger-method** skill to explore layers and alternatives, and the
-**complexity-review** skill to challenge over-engineered technical approaches early.
+feature, use the **story_splitting** skill to detect if the feature is too broad, 
+the **hamburger_method** skill to explore layers and alternatives, and the
+**complexity_review** skill to challenge over-engineered technical approaches early.
 3. When consensus is reached, **write or extend** `docs/features/<name>.spec` with a
 section containing:
    - **Purpose** — one sentence.

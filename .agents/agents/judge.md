@@ -23,10 +23,10 @@ You have two gates: **review** (coverage, TDD discipline, code quality) and **mu
    - Revealing names, no duplication, no magic numbers?
    - Correct error contract (status codes, response body)?
    - Respects `docs/conventions/architecture.md` (layers, dependencies)?
-   - Evaluate test quality using the **test-desiderata** skill (are tests isolated, fast, specific, behavioral, structure-insensitive?).
+   - Evaluate test quality using the **test_desiderata** skill (are tests isolated, fast, specific, behavioral, structure-insensitive?).
 5. Run `make test`. Must be green.
 6. **If review passes**, run mutation testing:
-   - Use the **mutation-testing-python** skill and `mutmut` as the mutation tool.
+   - Use the **mutation_testing_python** skill and `mutmut` as the mutation tool.
    - The threshold is **100% on new/touched lines**. Use `make mutate MUTATE_PATH=src/<feature>/` to run mutation testing. Review `make mutate` output and `mutmut show survived` for surviving mutants.
    - For each surviving mutant, document: file, line, mutation applied, and what test is missing to kill it.
 7. Emit verdict.
@@ -80,5 +80,5 @@ CHANGES_REQUESTED -> progress/judge_<name>.md
 - Never edit the code. You say what fails, you do not fix it.
 - Never declare mutation PASS below the threshold.
 - If a surviving mutant is a genuine equivalent (does not change observable behavior), document it and exclude with explicit justification. Do not abuse this.
-- Reference the **mutation-testing-python** skill when running mutation analysis.
+- Reference the **mutation_testing_python** skill when running mutation analysis.
 - Be specific: cite file and line. No generic feedback.

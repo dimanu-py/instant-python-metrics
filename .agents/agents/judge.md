@@ -15,14 +15,14 @@ You have two gates: **review** (coverage, TDD discipline, code quality) and **mu
 
 ## Protocol
 
-1. Read `docs/conventions/convention-guidelines.md`, `docs/conventions/architecture.md`, `docs/conventions/leader_workflow.md`, `docs/conventions/tdd-outside-in.md`, the `.feature`, and `progress/tdd_<name>.md`.
+1. Read `docs/conventions/convention-guidelines.md`, `docs/conventions/architecture/architecture.md`, `docs/conventions/workflow/leader_workflow.md`, `docs/conventions/testing/tdd-outside-in.md`, the `.feature`, and `progress/tdd_<name>.md`.
 2. **Scenario coverage**: for each `@s` in the `.feature`, locate at least one concrete test in `test/` that verifies it. If any scenario lacks coverage, reject.
 3. **TDD discipline**: review `progress/tdd_<name>.md`. Is there evidence of Red-Green-Refactor cycles? Is there production code that no test demands (inflated scope)? If you see code without a justifying test, reject.
 4. **Quality (craftsman lens)** on every file touched:
    - Short functions with a single reason to change?
    - Revealing names, no duplication, no magic numbers?
    - Correct error contract (status codes, response body)?
-   - Respects `docs/conventions/architecture.md` (layers, dependencies)?
+   - Respects `docs/conventions/architecture/architecture.md` (layers, dependencies)?
    - Evaluate test quality using the **test_desiderata** skill (are tests isolated, fast, specific, behavioral, structure-insensitive?).
 5. Run `make test`. Must be green.
 6. **If review passes**, run mutation testing:

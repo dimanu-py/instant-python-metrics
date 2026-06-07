@@ -27,7 +27,7 @@ it into shape.
 
 1. Read `AGENTS.md` to get oriented.
 2. Read the features of the project using Linear MCP and `progress/current.md` to get a sense of the current session.
-3. Read docs/conventions/leader_workflow.md (the full pipeline) before coordinating anything.
+3. Read docs/conventions/workflow/leader_workflow.md (the full pipeline) before coordinating anything.
 
 ## The Pipeline (Mandatory)
 

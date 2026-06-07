@@ -2,7 +2,7 @@
 
 ## Convention
 
-Every project convention (architectural decisions, style conventions, patterns) must be documented as a standalone Markdown file inside the `docs/conventions/` folder, organized by area (`testing/`, `database/`). Each document follows a fixed structure with these sections in order: Convention, Benefits, Examples (good and bad), Real world examples, and Related agreements.
+Every project convention (architectural decisions, style conventions, patterns) must be documented as a standalone Markdown file inside the `docs/conventions/` folder, organized by area (`architecture/`, `testing/`, `workflow/`). Each document follows a fixed structure with these sections in order: Convention, Benefits, Examples (good and bad), Real world examples, and Related agreements.
 
 The goal is to provide AI agents and developers with self-contained, discoverable references that require
 no extra context to understand.

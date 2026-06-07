@@ -139,4 +139,4 @@ Use case depends directly on a concrete adapter, making it impossible to test wi
 ## Related agreements
 
 - `docs/conventions/convention-guidelines.md` — document structure standard
-- `docs/conventions/leader_workflow.md` — the development pipeline this code structure supports
+- `docs/conventions/workflow/leader_workflow.md` — the development pipeline this code structure supports

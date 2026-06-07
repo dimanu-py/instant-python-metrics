@@ -177,5 +177,5 @@ A delivery unit test that also asserts database queries. Slow, coupled, and dupl
 
 ## Related agreements
 
-- `docs/conventions/architecture.md` — the code structure these tests exercise
+- `docs/conventions/architecture/architecture.md` — the code structure these tests exercise
 - `docs/conventions/convention-guidelines.md` — document structure standard

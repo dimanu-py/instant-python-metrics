@@ -30,7 +30,7 @@ the human decide; record the decision and its rationale.
 
 ## Protocol
 
-1. Read `docs/conventions/convention-guidelines.md`, `docs/conventions/architecture.md`, `docs/conventions/leader_workflow.md`, 
+1. Read `docs/conventions/convention-guidelines.md`, `docs/conventions/architecture/architecture.md`, `docs/conventions/workflow/leader_workflow.md`, 
 and any existing `.spec` or `.feature` for the feature.
 2. **Debate** open points with the human. One question or block of options per 
 turn — do not fire an entire questionnaire at once. When decomposing the 

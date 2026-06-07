@@ -12,6 +12,7 @@ pending
     → In Progress
     → [tdd_craftsman]  Red → Green → Refactor cycle (one test at a time)
     → [judge]          review + mutation testing
+    → [convention_keeper]  capture learnings → update convention docs
     → Release
 ```
 
@@ -31,7 +32,8 @@ the Gherkin is cheap and is the point of maximum leverage. The leader **stops** 
 Refactor (clean up in green). No code is written that no test asks for.
 4. **judge**: reviews all code and tests, then runs mutation testing. The review step is the whole 
 game: agents draft, judgment prunes. Mutation testing validates that the test suite actually 
-catches defects. Only when both review and mutation succeed is the feature marked `Release`.
+catches defects. Only when both review and mutation succeed does the leader run the **convention_keeper**.
+5. **convention_keeper**: reviews the completed feature's artifacts (`.spec`, progress logs, judge verdict), identifies new patterns or practices worth standardising, and creates or updates convention docs in `docs/conventions/`. Always asks the human to approve new convention files before finalising.
 
 ### Artifact map
 
@@ -41,7 +43,8 @@ catches defects. Only when both review and mutation succeed is the feature marke
 | `docs/features/<name>.feature` | spec_partner  | Gherkin scenarios (the signed contract)         |
 | `src/`, `test/`                | tdd_craftsman | Production code and tests, carved by TDD        |
 | `progress/tdd_<name>.md`       | tdd_craftsman | Cycle log + scenario-to-test map                |
-| `progress/judge_<name>.md`     | judge         | Review verdict + mutation score                 |
+| `progress/judge_<name>.md`     | judge              | Review verdict + mutation score                 |
+| `docs/conventions/`           | convention_keeper  | New or updated convention docs                  |
 
 Linear tracks feature status: `Todo → In Progress → Release`.
 
@@ -68,7 +71,7 @@ writes `docs/features/new-feature.spec`, then generates `docs/features/new-featu
 stops and asks the human to approve. 
 The human reads the scenarios, approves them. 
 The leader moves the issue to `In Progress`, launches `tdd_craftsman`. 
-Once tests pass, `judge` reviews and runs mutation. All green → feature moves to `Release`.
+Once tests pass, `judge` reviews and runs mutation. All green → `convention_keeper` captures learnings and updates conventions. Feature moves to `Release`.
 
 ### Bad: Skipping the spec conversation
 
@@ -85,6 +88,7 @@ The leader starts spec for feature A, then launches TDD for feature B while wait
 - `.agents/agents/spec_partner.md` — spec conversation agent
 - `.agents/agents/tdd_craftsman.md` — TDD execution agent
 - `.agents/agents/judge.md` — review and mutation agent
+- `.agents/agents/convention_keeper.md` — convention documentation agent
 
 ## Related agreements
 

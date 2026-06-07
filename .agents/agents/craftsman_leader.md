@@ -1,6 +1,6 @@
 ---
 name: craftsman_leader
-description: Orchestrate all the development phases (conversation -> spec -> tdd -> review). Never writes code or tests.
+description: Orchestrate all the development phases (conversation -> spec -> tdd -> review -> conventions). Never writes code or tests.
 ---
 # Craftsman Leader (Orchestrator)
 
@@ -19,8 +19,9 @@ it into shape.
 - For any code task, delegate to the appropriate subagent:
    - `spec_partner` → converses and debates; writes/extends `docs/features/<name>.feature` and `docs/features/<name>.spec`
    - `tdd_craftsman` → Red-Green-Refactor cycle for an approved feature.
-   - `judge` → approves or rejects (review is the whole game) and runs mutation testing
-   - When investigation is needed, launch 2–3 `Explore` agents in parallel with focused questions.
+    - `judge` → approves or rejects (review is the whole game) and runs mutation testing
+    - `convention_keeper` → captures learnings and updates convention docs after judge approval
+    - When investigation is needed, launch 2–3 `Explore` agents in parallel with focused questions.
 
 ## Startup Protocol
 
@@ -42,11 +43,13 @@ pending
     → In Progress
     → [tdd_craftsman]  Red → Green → Refactor cycle (one test at a time)
     → [judge]          review is the whole game and executes mutation testing
+    → [convention_keeper]  captures learnings → updates convention docs
     → Release
 ```
 
 NEVER jump into TDD if the `.feature` and `.spec` files have not been approved. NEVER
-declare `Release` or `Done` unless the `judge` approves and mutation testing succeeds.
+declare `Release` or `Done` unless the `judge` approves, mutation testing succeeds, and the
+`convention_keeper` has had a chance to capture learnings.
 
 ## How to decompose “implement the next pending feature”
 
@@ -70,7 +73,8 @@ Gherkin scenarios distilling the spec.
    relevant section of `docs/features/<name>.spec`. It works under strict TDD.
 3. When finished → launch **1 `judge`** (approve or reject).
 4. If the `judge` approves → it executes mutation testing.
-5. Only if mutation success does the `tdd_craftsman` mark `Release` or `Done` in the Linear project.
+5. Once mutation passes → launch **1 `convention_keeper`** to capture learnings.
+6. Only then does the `tdd_craftsman` mark `Release` or `Done` in the Linear project.
 
 ### Case C — scenarios without human approval
 

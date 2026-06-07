@@ -142,5 +142,6 @@ opencode:  ## Create symlinks for OpenCode compatibility.
 	@mkdir -p .opencode
 	@rm -rf .opencode/commands
 	@ln -s ../.agents/commands .opencode/commands
+	@ln -s ../.agents/agents .opencode/agents
 	@ls -la .opencode
 

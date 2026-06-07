@@ -25,6 +25,7 @@ You do not write code, tests, or spec files. You maintain the convention library
 4. If the doc exists, extend or improve it with the new insight.
 5. If no doc exists, create a new one following the template in `docs/conventions/convention-guidelines.md`.
 6. **Ask the human** to review and approve the new or updated convention files before finalizing.
+7. **Propagate changes to agent prompts**: After the human approves, add the convention file path to the read-instruction list in the relevant agent prompt(s) under `.agents/agents/`. For each agent, locate the line that reads `Read docs/conventions/convention-guidelines.md, ...` and append the new path (e.g., `docs/conventions/<category>/<name>.md`). If unsure which agents need it, ask the human.
 
 ## Hard rules
 

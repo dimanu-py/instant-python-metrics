@@ -1,0 +1,20 @@
+{
+    "exit_code_by_key": {
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_1": 33,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_2": 33,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_3": 33,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_4": 33,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_5": 33,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_6": 33
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {},
+    "estimated_durations_by_key": {
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_1": 0,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_2": 0,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_3": 0,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_4": 0,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_5": 0,
+        "common.http.error_response.x\u01c1ErrorResponse\u01c1as_json__mutmut_6": 0
+    }
+}

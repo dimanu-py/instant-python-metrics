@@ -1,0 +1,16 @@
+{
+    "exit_code_by_key": {
+        "usage_events.session.x\u01c1SessionManager\u01c1__init____mutmut_1": null,
+        "usage_events.session.x\u01c1SessionManager\u01c1__init____mutmut_2": null,
+        "usage_events.session.x\u01c1SessionManager\u01c1__init____mutmut_3": null,
+        "usage_events.session.x\u01c1SessionManager\u01c1__init____mutmut_4": null,
+        "usage_events.session.x\u01c1SessionManager\u01c1create_tables__mutmut_1": null,
+        "usage_events.session.x\u01c1SessionManager\u01c1clean_tables__mutmut_1": null,
+        "usage_events.session.x\u01c1SessionManager\u01c1clean_tables__mutmut_2": null,
+        "usage_events.session.x_reconfigure__mutmut_1": null,
+        "usage_events.session.x_reconfigure__mutmut_2": null
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {},
+    "estimated_durations_by_key": {}
+}

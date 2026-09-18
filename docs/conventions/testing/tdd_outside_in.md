@@ -42,17 +42,17 @@ Tag every test file with a `@pytest.mark` marker indicating the layer under test
 
 | Marker               | Layer            | File location                           |
 |----------------------|------------------|-----------------------------------------|
-| `@pytest.mark.acceptance` | Delivery (full stack) | `test/<feature>/delivery/test_acceptance.py` |
-| `@pytest.mark.unit`  | All unit tests   | `test/<feature>/**/test_*.py` (excluding acceptance) |
+| `@pytest.mark.acceptance` | Delivery (full stack) | `test/<feature>/test_routers.py` (acceptance class) |
+| `@pytest.mark.unit`  | All unit tests   | `test/<feature>/test_*.py` (non-acceptance classes) |
 
 Class-level markers keep test files clean:
 
 ```python
 @pytest.mark.acceptance
-class TestRegisterUsageEvent:
+class TestRegisterUsageEventAcceptance:
     """Acceptance tests for POST /api/v1/events."""
 
-    def test_valid_usage_event_returns_201_with_id_and_location(self, client: TestClient) -> None:
+    def test_should_return_204_when_payload_is_valid(self, client: TestClient) -> None:
         ...
 ```
 
@@ -61,7 +61,7 @@ class TestRegisterUsageEvent:
 class TestRegisterUsageEventRouter:
     """Unit tests for POST /api/v1/events router."""
 
-    def test_missing_required_field_returns_422(self, client: TestClient) -> None:
+    def test_should_return_422_when_required_field_is_missing(self, client: TestClient) -> None:
         ...
 ```
 
@@ -70,13 +70,13 @@ class TestRegisterUsageEventRouter:
 Link every test back to its Gherkin scenario using an `@sN` tag in the docstring. This creates traceability between the `.feature` file and the test suite:
 
 ```python
-def test_valid_usage_event_returns_201_with_id_and_location(self, client: TestClient) -> None:
+def test_should_return_204_when_payload_is_valid(self, client: TestClient) -> None:
     """@s1: Register a valid usage event with all fields."""
     ...
 ```
 
 ```python
-def test_missing_required_field_returns_422(self, client: TestClient) -> None:
+def test_should_return_422_when_required_field_is_missing(self, client: TestClient) -> None:
     """@s2: Missing a required field returns 422."""
     ...
 ```
@@ -91,34 +91,35 @@ Delivery tests use FastAPI `TestClient` against the ASGI app. Two categories:
 the real stack end-to-end. They are few and focus on proving the feature works.
 
 ```python
-# tests/invoices/delivery/test_acceptance.py
+# tests/usage_events/test_routers.py
 from fastapi.testclient import TestClient
 
-def test_create_invoice_returns_201_with_location(client: TestClient) -> None:
-    response = client.post("/invoices", json={"amount": "100.00", "currency": "USD"})
-    assert response.status_code == 201
-    assert response.headers["location"] == "/invoices/1"
+def test_should_return_204_when_payload_is_valid(client: TestClient) -> None:
+    response = client.post("/api/v1/events/", json=valid_payload)
+    assert response.status_code == 204
 ```
 
 **Delivery unit tests** — cover every scenario the acceptance tests do not exercise: validation errors, malformed requests, edge cases, and error responses. The use case collaborator is mocked with doublex so the test stays in the delivery layer.
 
 ```python
-# tests/invoices/delivery/test_router.py
-from doublex import ANY_ARG, Mock, expect_call
+# tests/usage_events/test_routers.py
+from doublex import ANY_ARG, Mock
+from doublex_expects import have_been_called_with
 from expects import expect, equal
 
-def test_database_unavailable_returns_503(client: TestClient) -> None:
-    from usage_events.delivery.router import _get_repository
-    from usage_events.domain.usage_event_repository import UsageEventRepository
+def test_should_return_503_when_database_unavailable(client: TestClient) -> None:
+    from usage_events.routers import _get_usage_event_register
+    from usage_events.usage_event_register import UsageEventRegister
 
-    repository = Mock(UsageEventRepository)
-    expect_call(repository).save(ANY_ARG).raises(RuntimeError("Database connection failed"))
+    register_mock = Mock(UsageEventRegister)
+    expect_call(register_mock).execute(ANY_ARG).raises(RuntimeError("Database connection failed"))
 
-    client.app.dependency_overrides[_get_repository] = lambda: repository
-
-    response = client.post("/api/v1/events", json=valid_payload)
-
-    expect(response.status_code).to(equal(503))
+    app.dependency_overrides[_get_usage_event_register] = lambda: register_mock
+    try:
+        response = client.post("/api/v1/events/", json=valid_payload)
+        expect(response.status_code).to(equal(503))
+    finally:
+        app.dependency_overrides.clear()
 ```
 
 ### Testing the application layer
@@ -126,19 +127,20 @@ def test_database_unavailable_returns_503(client: TestClient) -> None:
 Application tests exercise use cases in isolation. Infra port dependencies are mocked with doublex. These tests cover business rules, orchestration logic, and error handling.
 
 ```python
-# tests/invoices/application/test_create_invoice.py
-from doublex import ANY_ARG, Mock, expect_call
-from expects import expect, be_none, have_properties
+# tests/usage_events/test_usage_event_register.py
+from expects import expect, have_length
 
-def test_creates_invoice_and_saves() -> None:
-    repo: Any = Mock(InvoiceRepository)
-    expect_call(repo).save(ANY_ARG)
-    use_case = CreateInvoiceUseCase(repo)
-    event_id = use_case.execute(amount="100.00", currency="USD")
+def test_should_register_usage_event() -> None:
+    usage_event = UsageEventMother.dummy()
+    usage_event_repository = InMemoryUsageEventRepository()
+    register = UsageEventRegister(
+        repository=usage_event_repository,
+        uuid_generator=FakeUuidGenerator(uuid_value=usage_event["id"]),
+    )
 
-    expect(event_id).to_not(be_none)
-    saved_event = repo.save.calls[0].args[0]
-    expect(saved_event).to(have_properties(amount="100.00", currency="USD"))
+    register.execute(**{key: value for key, value in usage_event.items() if key != "id"})
+
+    expect(usage_event_repository).to(have_length(1))
 ```
 
 ### Testing the infra layer
@@ -146,56 +148,73 @@ def test_creates_invoice_and_saves() -> None:
 Infra integration tests run against real dependencies (PostgreSQL, external services). They verify adapter contracts match what the domain port promises.
 
 ```python
-# tests/invoices/infra/test_postgres_invoice_repository.py
+# tests/usage_events/test_postgres_usage_event_repository.py
 def test_saves_and_retrieves_invoice(db_session: Session) -> None:
-    repo = PostgresInvoiceRepository(db_session)
-    invoice = InvoiceMother.completed()
-    repo.save(invoice)
-    retrieved = repo.get(invoice.id)
-    assert retrieved == invoice
+    repo = PostgresUsageEventRepository(db_session)
+    event = UsageEventMother.dummy()
+    repo.save(event)
+    # ... verify via retrieval
 ```
 
 ### Test directory structure
 
 ```
 tests/
-  invoices/
-    delivery/
-      test_acceptance.py        # full-stack happy paths
-      test_router.py            # unit tests, use case mocked
-    application/
-      test_create_invoice.py    # unit tests, ports mocked
-      test_list_invoices.py
-    infra/
-      test_postgres_invoice_repository.py  # integration tests
+  usage_events/
+    test_routers.py                   # acceptance + unit tests for delivery layer
+    test_usage_event_register.py      # unit tests for use case
+    usage_event_mother.py             # test data factories
+    in_memory_usage_event_repository.py  # test double for repository
+    fake_uuid_generator.py            # test double for UUID generator
+    conftest.py                       # shared fixtures
 ```
 
 File naming: `test_<module>.py`, matching the module under test in `src/`.
 
 ### Object mothers
 
-Test data factories live in `src/<feature>/domain/mothers/`. They are importable by both tests and production code (for seeding).
+Test data factories live in `test/<feature>/`. They are used by tests only — never imported in production code.
 
 ```
-src/
-  invoices/
-    domain/
-      mothers/
-        invoice_mother.py       # domain.Mother.completed(), .with_items(...)
+test/
+  usage_events/
+    usage_event_mother.py             # UsageEventMother + UsageEventMotherForPayload
 ```
 
-Mothers follow a builder pattern with sensible defaults and named methods for variations:
+Mothers use static factory methods with sensible defaults and descriptive names:
 
 ```python
-# src/invoices/domain/mothers/invoice_mother.py
-class InvoiceMother:
+# test/usage_events/usage_event_mother.py
+class UsageEventMother:
     @staticmethod
-    def completed(**overrides: Any) -> Invoice:
-        return Invoice(
-            id=overrides.get("id", InvoiceId.new()),
-            status=overrides.get("status", InvoiceStatus.COMPLETED),
-            ...
+    def dummy() -> UsageEvent:
+        return UsageEvent(
+            id="06a2e698-4377-7f43-8000-0a4f8c034fd4",
+            ipy_version="1.2.3",
+            python_version="3.11",
+            operating_system="Linux",
+            user_id="550e8400-e29b-41d4-a716-446655440000",
+            command="init",
+            dependency_manager="uv",
+            template="standard",
+            built_in_features=["github_actions", "makefile"],
         )
+
+
+class UsageEventMotherForPayload:
+    _BASE_PAYLOAD = {
+        "ipy_version": "1.2.3",
+        "python_version": "3.11",
+        ...
+    }
+
+    @classmethod
+    def dummy(cls) -> dict:
+        return dict(cls._BASE_PAYLOAD)
+
+    @classmethod
+    def with_missing_field(cls, field_name: str) -> dict:
+        return {key: value for key, value in cls._BASE_PAYLOAD.items() if key != field_name}
 ```
 
 ## Benefits
@@ -208,20 +227,20 @@ class InvoiceMother:
 
 ## Examples
 
-### Good: Outside-In flow for create invoice
+### Good: Outside-In flow for register usage event
 
-1. Write acceptance test: `POST /invoices → 201` → Red (no router)
-2. Implement `delivery/router.py` → stubs `CreateInvoiceUseCase` → Green
-3. Write delivery unit test: missing amount returns 422 → Red
+1. Write acceptance test: `POST /api/v1/events/ → 204` → Red (no router)
+2. Implement `routers.py` → stubs `UsageEventRegister` → Green
+3. Write delivery unit test: missing field returns 422 → Red
 4. Add validation to router → Green → Refactor
 5. Write application test: use case calls repo.save → Red
-6. Implement `CreateInvoiceUseCase` → Green
+6. Implement `UsageEventRegister` → Green
 7. Write infra integration test: save and retrieve → Red
-8. Implement `PostgresInvoiceRepository` → Green
+8. Implement `PostgresUsageEventRepository` → Green
 
 ### Bad: Starting from the domain layer
 
-Write `Invoice` aggregate and `InvoiceRepository` port first, then build the use case, then add the router. No acceptance test exists until everything is wired. The domain might be over-engineered because no outer-layer test drove its shape.
+Write `UsageEvent` TypedDict and `UsageEventRepository` ABC first, then build the use case, then add the router. No acceptance test exists until everything is wired. The domain might be over-engineered because no outer-layer test drove its shape.
 
 ### Bad: Mixing test layers
 
@@ -229,11 +248,14 @@ A delivery unit test that also asserts database queries. Slow, coupled, and dupl
 
 ## Real world examples
 
-- `tests/` — all tests follow this structure
-- `src/<feature>/domain/mothers/` — object mothers per feature
+- `test/usage_events/test_routers.py` — acceptance + unit tests for the delivery layer
+- `test/usage_events/test_usage_event_register.py` — application layer unit tests
+- `test/usage_events/usage_event_mother.py` — object mothers for test data
 
 ## Related agreements
 
 - `docs/conventions/architecture/architecture.md` — the code structure these tests exercise
-- `docs/conventions/testing/doublex-mocking.md` — doublex mocking patterns for repository ports
-- `docs/conventions/convention-guidelines.md` — document structure standard
+- `docs/conventions/testing/test-naming.md` — `test_should_<behavior>` naming
+- `docs/conventions/testing/object-mother.md` — Object Mother pattern for test data
+- `docs/conventions/testing/test-isolation.md` — acceptance vs unit, mocking use cases, test doubles
+- `docs/conventions/convention_guidelines.md` — document structure standard

@@ -123,6 +123,16 @@ show:  ## Show installed dependencies.
 search:  ## Show package details.
 	@read -p "Enter package name to search: " package;\
 	@uv pip show $$package
+.PHONY: up
+up:  ## Start Docker services (Postgres).
+	@echo "⌛ Starting Docker services...\n"
+	@docker compose up --detach --wait postgres
+
+.PHONY: down
+down:  ## Stop Docker services.
+	@echo "\n⌛ Stopping Docker services...\n"
+	@docker compose down
+
 .PHONY: claude
 claude:  ## Create symlinks for Claude Code compatibility (CLAUDE.md → AGENTS.md, .claude → .agents).
 	@echo "\n⌛ Creating Claude Code symlinks...\n"

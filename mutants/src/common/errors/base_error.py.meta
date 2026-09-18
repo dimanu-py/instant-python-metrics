@@ -1,0 +1,12 @@
+{
+    "exit_code_by_key": {
+        "common.errors.base_error.x\u01c1BaseError\u01c1__init____mutmut_1": 33,
+        "common.errors.base_error.x\u01c1BaseError\u01c1__init____mutmut_2": 33
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {},
+    "estimated_durations_by_key": {
+        "common.errors.base_error.x\u01c1BaseError\u01c1__init____mutmut_1": 0,
+        "common.errors.base_error.x\u01c1BaseError\u01c1__init____mutmut_2": 0
+    }
+}

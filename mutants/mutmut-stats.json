@@ -1,0 +1,175 @@
+{
+    "tests_by_mangled_function_name": {
+        "usage_events.usage_event_register.x\u01c1UsageEventRegister\u01c1execute": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_usage_event_register.py::TestUsageEventRegister::test_should_register_usage_event",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided"
+        ],
+        "usage_events.validators.x_non_empty_feature": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_required_field_is_missing",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver"
+        ],
+        "usage_events.validators.x_validate_strict_semver": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_is_not_array",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_all_fields_are_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver"
+        ],
+        "usage_events.session.x\u01c1SessionManager\u01c1create_tables": [
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_usage_event_with_all_fields_preserved",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_required_field_is_missing",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_is_not_array",
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_roundtrip_via_from_domain_and_to_domain",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_json_body_is_malformed",
+            "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_configure_check_same_thread_for_sqlite",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_all_fields_are_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver"
+        ],
+        "usage_events.validators.x_validate_relaxed_semver": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_required_field_is_missing",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_is_not_array",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_all_fields_are_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver"
+        ],
+        "usage_events.routers.x__get_usage_event_register": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty"
+        ],
+        "usage_events.session.x\u01c1SessionManager\u01c1__init__": [
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_usage_event_with_all_fields_preserved",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings",
+            "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_pass_check_same_thread_to_create_engine_for_sqlite",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_required_field_is_missing",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_is_not_array",
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_roundtrip_via_from_domain_and_to_domain",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_json_body_is_malformed",
+            "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_configure_check_same_thread_for_sqlite",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_all_fields_are_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver",
+            "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_not_pass_check_same_thread_to_create_engine_for_postgres"
+        ],
+        "usage_events.usage_event_register.x\u01c1UsageEventRegister\u01c1__init__": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_usage_event_register.py::TestUsageEventRegister::test_should_register_usage_event",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided"
+        ],
+        "usage_events.usage_event_repository.x\u01c1PostgresUsageEventRepository\u01c1__init__": [
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_usage_event_with_all_fields_preserved",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_roundtrip_via_from_domain_and_to_domain",
+            "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_configure_check_same_thread_for_sqlite",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_multiple_usage_events_with_different_ids",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided"
+        ],
+        "usage_events.session.x_reconfigure": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_required_field_is_missing",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_json_body_is_malformed",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_is_not_array",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_all_fields_are_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver"
+        ],
+        "usage_events.usage_event_model.x\u01c1UsageEventModel\u01c1from_domain": [
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_usage_event_with_all_fields_preserved",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_roundtrip_via_from_domain_and_to_domain",
+            "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_configure_check_same_thread_for_sqlite",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_multiple_usage_events_with_different_ids",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided"
+        ],
+        "usage_events.validators.x_validate_uuid": [
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_required_field_is_missing",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_is_not_array",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_all_fields_are_empty",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided",
+            "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver"
+        ],
+        "usage_events.session.x\u01c1SessionManager\u01c1clean_tables": [
+            "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_configure_check_same_thread_for_sqlite",
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_multiple_usage_events_with_different_ids"
+        ],
+        "usage_events.usage_event_model.x\u01c1UsageEventModel\u01c1to_domain": [
+            "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_roundtrip_via_from_domain_and_to_domain"
+        ]
+    },
+    "duration_by_test": {
+        "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_payload_is_valid": 4.151926491998893,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_built_in_features_is_empty": 0.050567275007779244,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventAcceptance::test_should_return_204_when_extra_unknown_fields_are_provided": 0.049216716004593764,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_204_when_payload_is_valid_and_forward_to_use_case": 0.041115980995527934,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_required_field_is_missing": 0.03956397900765296,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_field_is_empty_string": 0.03982858199742623,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_ipy_version_is_invalid_semver": 0.04126793899195036,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_user_id_is_invalid_uuid": 0.04027612400386715,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_is_not_array": 0.03913055399607401,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_built_in_features_has_empty_strings": 0.041002735000802204,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_json_body_is_malformed": 0.03814837700338103,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_all_fields_are_empty": 0.04176843100140104,
+        "test/usage_events/test_routers.py::TestRegisterUsageEventRouter::test_should_return_422_when_mix_of_valid_and_invalid_fields": 0.047640518991102,
+        "test/usage_events/test_usage_event_register.py::TestUsageEventRegister::test_should_register_usage_event": 0.0005382929957704619,
+        "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_usage_event_to_postgres": 3.8169228619954083,
+        "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_multiple_usage_events_with_different_ids": 0.8315491060056956,
+        "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_roundtrip_via_from_domain_and_to_domain": 4.6645511940077995,
+        "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_configure_check_same_thread_for_sqlite": 0.005737544997828081,
+        "test/usage_events/test_usage_event_repository.py::TestUsageEventRepository::test_should_save_usage_event_with_all_fields_preserved": 4.197448719998647,
+        "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_pass_check_same_thread_to_create_engine_for_sqlite": 0.001948470999195706,
+        "test/usage_events/test_usage_event_repository.py::TestSessionManagerSqlite::test_should_not_pass_check_same_thread_to_create_engine_for_postgres": 0.0009296289936173707
+    },
+    "stats_time": 2.133168083
+}

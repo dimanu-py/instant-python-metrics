@@ -1,0 +1,12 @@
+{
+    "exit_code_by_key": {
+        "usage_events.usage_event_repository.x\u01c1PostgresUsageEventRepository\u01c1__init____mutmut_1": null
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "usage_events.usage_event_repository.x\u01c1PostgresUsageEventRepository\u01c1__init____mutmut_1": 0.084925
+    },
+    "estimated_durations_by_key": {
+        "usage_events.usage_event_repository.x\u01c1PostgresUsageEventRepository\u01c1__init____mutmut_1": 13.950997048021236
+    }
+}

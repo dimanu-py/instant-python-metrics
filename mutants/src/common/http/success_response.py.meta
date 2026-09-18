@@ -1,0 +1,16 @@
+{
+    "exit_code_by_key": {
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_1": 33,
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_2": 33,
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_3": 33,
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_4": 33
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {},
+    "estimated_durations_by_key": {
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_1": 0,
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_2": 0,
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_3": 0,
+        "common.http.success_response.x\u01c1SuccessResponse\u01c1as_json__mutmut_4": 0
+    }
+}

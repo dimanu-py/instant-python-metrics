@@ -1,0 +1,24 @@
+{
+    "exit_code_by_key": {
+        "usage_events.routers.x__get_usage_event_register__mutmut_1": 1,
+        "usage_events.routers.x__get_usage_event_register__mutmut_2": 1,
+        "usage_events.routers.x__get_usage_event_register__mutmut_3": 1,
+        "usage_events.routers.x__get_usage_event_register__mutmut_4": 1,
+        "usage_events.routers.x__get_usage_event_register__mutmut_5": 1
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "usage_events.routers.x__get_usage_event_register__mutmut_1": 8.66638,
+        "usage_events.routers.x__get_usage_event_register__mutmut_5": 8.770054,
+        "usage_events.routers.x__get_usage_event_register__mutmut_4": 8.933127,
+        "usage_events.routers.x__get_usage_event_register__mutmut_3": 9.098799,
+        "usage_events.routers.x__get_usage_event_register__mutmut_2": 9.510221
+    },
+    "estimated_durations_by_key": {
+        "usage_events.routers.x__get_usage_event_register__mutmut_1": 4.251710483011266,
+        "usage_events.routers.x__get_usage_event_register__mutmut_2": 4.251710483011266,
+        "usage_events.routers.x__get_usage_event_register__mutmut_3": 4.251710483011266,
+        "usage_events.routers.x__get_usage_event_register__mutmut_4": 4.251710483011266,
+        "usage_events.routers.x__get_usage_event_register__mutmut_5": 4.251710483011266
+    }
+}

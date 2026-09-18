@@ -8,10 +8,12 @@ Use the `uuid_extensions` library's `uuid7()` function for generation. This libr
 
 Apply `uuid7()` in two contexts:
 
-- **Domain entities** (dataclasses): use `field(default_factory=uuid7)`
-- **SQLAlchemy ORM models**: use `default=lambda: uuid7()` on the column definition
+- **Injected port interface (recommended)**: Define a `UuidGenerator` ABC in the domain layer. The use case calls `uuid_generator.generate()` and passes the result to the domain entity constructor. This makes tests deterministic (a fake can return fixed UUIDs) and keeps the domain entity free of generation concerns.
+- **SQLAlchemy ORM models**: use `default=lambda: uuid7()` on the column definition for the persistence layer.
 
-Do NOT use `uuid.uuid4()` for server-generated IDs. UUID v4 is acceptable only for client-generated identifiers (e.g., `distinct_id` sent by the CLI).
+For CLI tools or client-generated identifiers only: `uuid.uuid4()` is acceptable (e.g., `user_id` sent by the CLI), where the ID is generated outside the server.
+
+Do NOT use `uuid.uuid4()` for server-generated entity IDs. UUID v7's time-ordered nature is essential for index performance.
 
 ## Benefits
 
@@ -21,40 +23,66 @@ Do NOT use `uuid.uuid4()` for server-generated IDs. UUID v4 is acceptable only f
 
 ## Examples
 
-### Good: Dataclass entity with UUID v7 default
+### Good: UuidGenerator port interface with explicit dependency injection
 
 ```python
-from dataclasses import dataclass, field
-from uuid import UUID
-
-from uuid_extensions import uuid7
+# src/usage_events/uuid_generator.py
+from abc import ABC, abstractmethod
 
 
-@dataclass
-class UsageEvent:
-    event_id: UUID = field(default_factory=uuid7)
-    ipy_version: str = ""
-    operating_system: str = ""
+class UuidGenerator(ABC):
+    @abstractmethod
+    def generate(self) -> str: ...
+
+
+# src/usage_events/usage_event.py
+from typing import TypedDict
+
+
+class UsageEvent(TypedDict):
+    id: str
+    # ... other fields
+
+
+# src/usage_events/usage_event_register.py
+class UsageEventRegister:
+    def __init__(self, uuid_generator: UuidGenerator) -> None:
+        self._uuid_generator = uuid_generator
+
+    def execute(self, ...) -> None:
+        event_id = self._uuid_generator.generate()
+        event = UsageEvent(id=event_id, ...)
+        self._repository.save(event)
+
+
+# src/usage_events/uuid_generator.py
+from uuid_extensions import uuid7str
+
+
+class Uuid7Generator(UuidGenerator):
+    def generate(self) -> str:
+        return uuid7str()
 ```
 
-### Good: SQLAlchemy ORM model with UUID v7 default
+### Good: SQLAlchemy ORM model with column default
 
 ```python
-import uuid
+from datetime import UTC, datetime
 
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
-from uuid_extensions import uuid7
+from sqlalchemy import Column, DateTime, String
+from sqlalchemy.orm import DeclarativeBase
 
 
-class UsageEventModel(Base):
+class Base(DeclarativeBase):
+    pass
+
+
+class UsageEventTable(Base):
     __tablename__ = "usage_events"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
-        primary_key=True,
-        default=lambda: uuid7(),
-    )
+    id = Column(String(36), primary_key=True)
+    # ... other columns
+    created_at = Column(DateTime, nullable=False, default=lambda: datetime.now(UTC))
 ```
 
 ### Bad: Using UUID v4 for server-generated IDs
@@ -68,6 +96,20 @@ class UsageEvent:
     event_id: UUID = field(default_factory=uuid.uuid4)
 ```
 
+### Bad: Hard-coding generation in the domain entity
+
+```python
+from dataclasses import dataclass, field
+from uuid_extensions import uuid7
+
+@dataclass
+class UsageEvent:
+    # Domain entity has a hard dependency on uuid_extensions.
+    # Cannot inject a fake UUID for testing — tests always get real UUIDs.
+    # The entity should not own the generation concern.
+    event_id: UUID = field(default_factory=uuid7)
+```
+
 ### Bad: Mutating default in dataclass
 
 ```python
@@ -79,11 +121,12 @@ class UsageEvent:
 
 ## Real world examples
 
-- `src/usage_events/domain/usage_event.py` — dataclass with `field(default_factory=uuid7)`
-- `src/usage_events/infra/models.py` — SQLAlchemy model with `default=lambda: uuid7()`
+- `src/usage_events/uuid_generator.py` — `UuidGenerator` ABC + `Uuid7Generator` implementation
+- `src/usage_events/usage_event_register.py` — use case injecting the `UuidGenerator`
+- `src/usage_events/usage_event.py` — domain entity (`TypedDict`) receiving `id` as a field
+- `src/usage_events/database.py` — SQLAlchemy model with `created_at` column default
 
 ## Related agreements
 
-- `docs/conventions/architecture/architecture.md` — domain entity and ORM model layering
-- `docs/conventions/architecture/postgres-repository.md` — PostgreSQL repository adapter pattern
-- `docs/conventions/testing/doublex-mocking.md` — mocking UUID generation in tests (not needed, since `uuid7()` is deterministic enough for tests)
+- `docs/conventions/architecture/architecture.md` — flat feature structure with port interfaces
+- `docs/conventions/database/postgres-repository.md` — PostgreSQL repository adapter pattern

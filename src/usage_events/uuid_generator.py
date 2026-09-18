@@ -1,0 +1,16 @@
+from abc import ABC, abstractmethod
+from typing import override
+
+from uuid_extensions import uuid7str
+
+
+class UuidGenerator(ABC):
+    @abstractmethod
+    def generate(self) -> str:
+        raise NotImplementedError
+
+
+class Uuid7Generator(UuidGenerator):
+    @override
+    def generate(self) -> str:
+        return uuid7str()

@@ -22,5 +22,6 @@ template:
   - makefile
   - precommit_hook
   - ai_agents
+  - fastapi_application
   name: standard_project
   specify_bounded_context: false
